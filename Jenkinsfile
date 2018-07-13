@@ -3,7 +3,9 @@ pipeline {
   // DBNAME=sh 'echo "$(echo $GIT_COMMIT | head -c7)_db_$BUILD_NUMBER"'
   stages {
     stage('Setup Environment') {
-        env.SHAREDVAR='shared!'
+            steps{
+                timeout(10) { env.SHAREDVAR='shared!' }
+            }
     }  
         
     stage('Checkout Code') {
