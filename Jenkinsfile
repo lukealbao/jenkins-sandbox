@@ -14,7 +14,12 @@ pipeline {
 
     stage('Environment Testing') {
       environment {
-        PGDATABASE="\$(echo $GIT_COMMIT | head -c7)_build_\$BUILD_NUMBER}"
+        PGDATABASE=sh (
+            script: """
+            echo "$(echo $GIT_COMMIT | head -c7)_build_$BUILD_NUMBER}"
+            """
+            returnStdout: true
+        ).trim()
       }
 
       steps {
