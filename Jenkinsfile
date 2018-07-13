@@ -1,5 +1,6 @@
 pipeline {
- agent any
+    agent any
+    MYDB = "${GIT_COMMIT}".take(7) + "_build_${BUILD_NUMBER}"
 
   stages {
         
@@ -14,7 +15,7 @@ pipeline {
 
     stage('Environment Testing') {
       environment {
-        PGDATABASE="${GIT_COMMIT}".take(7) + "_build_${BUILD_NUMBER}"
+        PGDATABASE=MYDB
       }
 
       steps {
