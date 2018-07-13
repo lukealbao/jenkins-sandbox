@@ -2,8 +2,8 @@ pipeline {
   agent any
   // DBNAME=sh 'echo "$(echo $GIT_COMMIT | head -c7)_db_$BUILD_NUMBER"'
   stages {
-    environment {
-        SHAREDVAR='shared!'
+    stage('Setup Environment') {
+        env.SHAREDVAR='shared!'
     }  
         
     stage('Checkout Code') {
