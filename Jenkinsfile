@@ -1,7 +1,7 @@
 pipeline {
   agent any
   // DBNAME=sh 'echo "$(echo $GIT_COMMIT | head -c7)_db_$BUILD_NUMBER"'
-  DBNAME='hello'
+  def DBNAME='hello'
   stages {
         
     stage('Checkout Code') {
