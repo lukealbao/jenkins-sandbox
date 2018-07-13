@@ -14,7 +14,7 @@ pipeline {
 
     stage('Environment Testing') {
       environment {
-        PGDATABASE="${GIT_COMMIT}".take(7)
+        PGDATABASE="${GIT_COMMIT}".take(7).concat("_build_${BUILD_NUMBER}")
       }
 
       steps {
