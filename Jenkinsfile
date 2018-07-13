@@ -2,8 +2,9 @@ pipeline {
   agent any
   // DBNAME=sh 'echo "$(echo $GIT_COMMIT | head -c7)_db_$BUILD_NUMBER"'
   stages {
-    def DBNAME='hello'
-  
+    environment {
+        SHAREDVAR='shared!'
+    }  
         
     stage('Checkout Code') {
       steps {
@@ -15,13 +16,14 @@ pipeline {
     }
 
     stage('Environment Testing') {
-      environment {
-        PGDATABASE=DBNAME
-      }
+      // environment {
+      //   PGDATABASE=DBNAME
+      // }
 
       steps {
-        timeout(10) {
-          sh 'echo "PGDATABASE is ${PGDATABASE}"'
+                timeout(10) {
+                    sh "echo ${SHAREDVAR}"
+          // sh 'echo "PGDATABASE is ${PGDATABASE}"'
         }
       }
     }
