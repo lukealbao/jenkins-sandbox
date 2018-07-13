@@ -3,9 +3,13 @@ pipeline {
   // DBNAME=sh 'echo "$(echo $GIT_COMMIT | head -c7)_db_$BUILD_NUMBER"'
   stages {
     stage('Setup Environment') {
-            steps{
-                script { env.SHAREDVAR='shared!' }
-            }
+      steps{
+        script {
+          env.SHAREDVAR='shared!'
+          env.PGDATABASE=sh 'echo "$(echo $GIT_COMMIT | head -c7)_db_$BUILD_NUMBER"'
+          env.PGHOST=localhost
+        }
+      }
     }  
         
     stage('Checkout Code') {
@@ -17,15 +21,11 @@ pipeline {
       }
     }
 
-    stage('Environment Testing') {
-      // environment {
-      //   PGDATABASE=DBNAME
-      // }
-
+    stage('Create database') {
       steps {
-                timeout(10) {
-                    sh "echo ${SHAREDVAR}"
-          // sh 'echo "PGDATABASE is ${PGDATABASE}"'
+        timeout(10) {
+          sh "echo using db ${PGDATABASE}"
+          sh "createdb ${PGDATABASE}"          
         }
       }
     }
