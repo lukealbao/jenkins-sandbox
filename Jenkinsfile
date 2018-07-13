@@ -14,7 +14,7 @@ pipeline {
 
     stage('Environment Testing') {
       environment {
-        PGDATABASE="${GIT_COMMIT}_${BUILD_ID}"
+        PGDATABASE="\$(echo $GIT_COMMIT | head -c7)_build_\$BUILD_NUMBER}"
       }
 
       steps {
