@@ -5,9 +5,8 @@ pipeline {
     stage('Setup Environment') {
       steps{
         script {
-          env.SHAREDVAR='shared!'
           env.PGDATABASE=sh 'echo "$(echo $GIT_COMMIT | head -c7)_db_$BUILD_NUMBER"'
-          env.PGHOST=localhost
+          env.PGHOST='localhost'
         }
       }
     }  
