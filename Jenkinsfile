@@ -4,7 +4,7 @@ pipeline {
   stages {
     stage('Setup Environment') {
             steps{
-                timeout(10) { env.SHAREDVAR='shared!' }
+                script { env.SHAREDVAR='shared!' }
             }
     }  
         
