@@ -1,5 +1,5 @@
 // STATUS
-// seems to be the one that works: stages > X > steps > script > <work>
+// <VAR> = sh '<command>' syntax leaves <VAR> null. Let's try piping it.
 
 pipeline {
   agent any
@@ -8,7 +8,7 @@ pipeline {
     stage('Setup Environment') {
       steps{
         script {
-          PGDATABASE=sh 'echo "$(echo $GIT_COMMIT | head -c7)_db_$BUILD_NUMBER"'
+          PGDATABASE=sh(returnStdout: true, script: 'echo "$(echo $GIT_COMMIT | head -c7)_db_$BUILD_NUMBER"').trim()
           PGHOST='localhost'
         }
         echo "after assigning value is ${PGDATABASE}"
