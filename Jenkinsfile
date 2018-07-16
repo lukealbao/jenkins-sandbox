@@ -41,7 +41,7 @@ pipeline {
 
     stage('Run Tests') {
       steps {
-        timeout(10) {
+        nodejs(nodeJSInstallationName: 'node') {
           sh 'npm test'
         }
       }
