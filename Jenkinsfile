@@ -8,8 +8,8 @@ pipeline {
     stage('Setup Environment') {
       steps{
         script {
-          env.PGDATABASE=sh 'echo "$(echo $GIT_COMMIT | head -c7)_db_$BUILD_NUMBER"'
-          env.PGHOST='localhost'
+          PGDATABASE=sh 'echo "$(echo $GIT_COMMIT | head -c7)_db_$BUILD_NUMBER"'
+          PGHOST='localhost'
         }
       }
     }  
@@ -26,7 +26,7 @@ pipeline {
     stage('Create database') {
       steps {
         timeout(10) {
-          sh "echo using db ${env.PGDATABASE}"
+          sh "echo using db ${PGDATABASE}"
           // sh "createdb ${env.PGDATABASE}"          
         }
       }
