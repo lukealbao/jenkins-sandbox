@@ -1,3 +1,8 @@
+// STATUS
+// I tried to build with a top-level environment, since that is documented
+// in the Jenkins docs (https://jenkins.io/doc/pipeline/tour/environment/),
+// but it appers you can't use a shell command to apply it.
+
 pipeline {
   agent any
     environment {
@@ -27,7 +32,8 @@ pipeline {
       steps {
         timeout(10) {
           sh "echo using db ${env.PGDATABASE}"
-          sh "createdb ${env.PGDATABASE}"          
+          sh "echo currentBuild.fullDisplayName ${currentBuild.fullDisplayName}"
+          // sh "createdb ${env.PGDATABASE}"          
         }
       }
     }
