@@ -11,6 +11,7 @@ pipeline {
           PGDATABASE=sh 'echo "$(echo $GIT_COMMIT | head -c7)_db_$BUILD_NUMBER"'
           PGHOST='localhost'
         }
+        echo "after assigning value is ${PGDATABASE}"
       }
     }  
         
