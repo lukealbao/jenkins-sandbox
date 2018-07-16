@@ -25,6 +25,7 @@ pipeline {
     stage('Create database') {
       steps {
         timeout(10) {
+          sh 'echo "MYUSER:${PGPASSWORD}" > .mypassfile'
           echo "using db ${env.PGDATABASE}"
           echo "direct echo ${PGDATABASE}"
           sh 'echo "shell echo ${PGDATABASE}"'
