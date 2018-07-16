@@ -26,7 +26,7 @@ pipeline {
     stage('Create database') {
       steps {
         timeout(10) {
-          sh "echo using db ${PGDATABASE}"
+          echo "using db ${PGDATABASE}"
           // sh "createdb ${env.PGDATABASE}"          
         }
       }
