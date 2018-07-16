@@ -37,12 +37,23 @@ pipeline {
       }
     }
 
+    stage('Run Tests') {
+      steps {
+        sh 'npm test'
+      }
+    }
+
     stage('Cleanup') {
       steps {
         timeout(10) {
           deleteDir()
         }
       }
+    }    
+  }
+  post {
+    always {
+      junit 'xunit.xml'
     }
   }
 }

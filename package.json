@@ -1,0 +1,14 @@
+{
+  "name": "jenkins-sandbox",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:lukealbao/jenkins-sandbox.git",
+  "author": "Luke Albao <luke@adhocteam.us>",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^5.2.0"
+  },
+  "scripts": {
+    "test": "mocha test.js -R xunit -O output=xunit.xml"
+  }
+}
