@@ -41,7 +41,9 @@ pipeline {
 
     stage('Run Tests') {
       steps {
-        sh 'npm test'
+        timeout(10) {
+          sh 'npm test'
+        }
       }
     }
 
