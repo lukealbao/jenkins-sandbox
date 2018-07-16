@@ -26,6 +26,8 @@ pipeline {
       steps {
         timeout(10) {
           echo "using db ${env.PGDATABASE}"
+          echo "direct echo ${PGDATABASE}"
+          sh 'echo "shell echo ${PGDATABASE}"'
         }
       }
     }
