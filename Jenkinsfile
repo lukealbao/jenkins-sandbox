@@ -1,5 +1,6 @@
 // STATUS
-// <VAR> = sh '<command>' syntax leaves <VAR> null. Let's try piping it.
+//
+// OK! Correct syntax is <VAR>=sh(returnStdout: true, script: '<command>').trim()
 
 pipeline {
   agent any
@@ -8,7 +9,7 @@ pipeline {
     stage('Setup Environment') {
       steps{
         script {
-          PGDATABASE=sh(returnStdout: true, script: 'echo "$(echo $GIT_COMMIT | head -c7)_db_$BUILD_NUMBER"').trim()
+          env.PGDATABASE=sh(returnStdout: true, script: 'echo "$(echo $GIT_COMMIT | head -c7)_db_$BUILD_NUMBER"').trim()
           PGHOST='localhost'
         }
         echo "after assigning value is ${PGDATABASE}"
@@ -27,7 +28,7 @@ pipeline {
     stage('Create database') {
       steps {
         timeout(10) {
-          echo "using db ${PGDATABASE}"
+          echo "using db ${env.PGDATABASE}"
           // sh "createdb ${env.PGDATABASE}"          
         }
       }
