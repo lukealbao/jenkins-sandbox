@@ -1,23 +1,18 @@
 // STATUS
-// I tried to build with a top-level environment, since that is documented
-// in the Jenkins docs (https://jenkins.io/doc/pipeline/tour/environment/),
-// but it appers you can't use a shell command to apply it.
+// seems to be the one that works: stages > X > steps > script > <work>
 
 pipeline {
   agent any
-    script {
-        env.PGDATABASE=sh 'echo "$(echo $GIT_COMMIT | head -c7)_db_$BUILD_NUMBER"'
-    }
   // DBNAME=sh 'echo "$(echo $GIT_COMMIT | head -c7)_db_$BUILD_NUMBER"'
   stages {
-    // stage('Setup Environment') {
-    //   steps{
-    //     script {
-    //       env.PGDATABASE=sh 'echo "$(echo $GIT_COMMIT | head -c7)_db_$BUILD_NUMBER"'
-    //       env.PGHOST='localhost'
-    //     }
-    //   }
-    // }  
+    stage('Setup Environment') {
+      steps{
+        script {
+          env.PGDATABASE=sh 'echo "$(echo $GIT_COMMIT | head -c7)_db_$BUILD_NUMBER"'
+          env.PGHOST='localhost'
+        }
+      }
+    }  
         
     stage('Checkout Code') {
       steps {
