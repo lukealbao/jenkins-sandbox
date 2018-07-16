@@ -1,15 +1,18 @@
 pipeline {
   agent any
+    environment {
+        env.PGDATABASE=sh 'echo "$(echo $GIT_COMMIT | head -c7)_db_$BUILD_NUMBER"'
+    }
   // DBNAME=sh 'echo "$(echo $GIT_COMMIT | head -c7)_db_$BUILD_NUMBER"'
   stages {
-    stage('Setup Environment') {
-      steps{
-        script {
-          env.PGDATABASE=sh 'echo "$(echo $GIT_COMMIT | head -c7)_db_$BUILD_NUMBER"'
-          env.PGHOST='localhost'
-        }
-      }
-    }  
+    // stage('Setup Environment') {
+    //   steps{
+    //     script {
+    //       env.PGDATABASE=sh 'echo "$(echo $GIT_COMMIT | head -c7)_db_$BUILD_NUMBER"'
+    //       env.PGHOST='localhost'
+    //     }
+    //   }
+    // }  
         
     stage('Checkout Code') {
       steps {
