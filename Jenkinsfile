@@ -5,8 +5,8 @@
 
 pipeline {
   agent any
-    environment {
-        PGDATABASE=sh 'echo "$(echo $GIT_COMMIT | head -c7)_db_$BUILD_NUMBER"'
+    script {
+        env.PGDATABASE=sh 'echo "$(echo $GIT_COMMIT | head -c7)_db_$BUILD_NUMBER"'
     }
   // DBNAME=sh 'echo "$(echo $GIT_COMMIT | head -c7)_db_$BUILD_NUMBER"'
   stages {
@@ -32,7 +32,6 @@ pipeline {
       steps {
         timeout(10) {
           sh "echo using db ${env.PGDATABASE}"
-          sh "echo currentBuild.fullDisplayName ${currentBuild}"
           // sh "createdb ${env.PGDATABASE}"          
         }
       }
