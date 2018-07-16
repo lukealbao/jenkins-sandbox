@@ -32,7 +32,7 @@ pipeline {
       steps {
         timeout(10) {
           sh "echo using db ${env.PGDATABASE}"
-          sh "echo currentBuild.fullDisplayName ${currentBuild.fullDisplayName}"
+          sh "echo currentBuild.fullDisplayName ${currentBuild}"
           // sh "createdb ${env.PGDATABASE}"          
         }
       }
